@@ -1,0 +1,5 @@
+use_frameworks!
+target 'FirebaseFriendRequest'
+pod 'Firebase'
+pod 'Firebase/Database'
+pod 'Firebase/Auth'
