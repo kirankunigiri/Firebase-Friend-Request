@@ -45,7 +45,6 @@ class DataController {
     }
     
     func loginAccount(email: String, password: String, completion: (success: Bool) -> Void) {
-        print("logging in user")
         FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user, error) in
             
             if (error == nil) {
@@ -85,5 +84,5 @@ class DataController {
             completion(email: snapshot.value as! String)
         })
     }
-        
+    
 }

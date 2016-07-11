@@ -23,7 +23,7 @@ class FriendViewController: UIViewController {
             self.tableView.reloadData()
             for child in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 let id = child.key
-                let email = DataController.dataController.emailForUserID(id, completion: { (email) in
+                DataController.dataController.emailForUserID(id, completion: { (email) in
                     self.friendList.append((email, id))
                     self.tableView.reloadData()
                 })
