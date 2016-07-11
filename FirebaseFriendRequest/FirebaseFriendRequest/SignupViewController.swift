@@ -19,14 +19,63 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var loginEmailField: UITextField!
     @IBOutlet weak var loginPasswordField: UITextField!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     // MARK: - Actions
     @IBAction func signupButtonTapped(sender: UIButton) {
         
+        let email = signupEmailField.text!
+        let password = signupPasswordField.text!
+        
+        if email != "" && password.characters.count >= 6 {
+            DataController.dataController.createAccount(email, password: password) { (success) in
+                if success {
+                    self.performSegueWithIdentifier("signupCompleteSegue", sender: self)
+                } else {
+                    // Error
+                    self.presentSignupAlertView()
+                }
+            }
+        } else {
+            // Fields not filled
+            presentSignupAlertView()
+        }
+        
     }
     
-    
     @IBAction func loginButtonTapped(sender: UIButton) {
+        let email = loginEmailField.text!
+        let password = loginPasswordField.text!
         
+        if email != "" && password.characters.count >= 6 {
+            DataController.dataController.loginAccount(email, password: password) { (success) in
+                if success {
+                    self.performSegueWithIdentifier("signupCompleteSegue", sender: self)
+                } else {
+                    // Error
+                    self.presentSignupAlertView()
+                }
+            }
+        } else {
+            // Fields not filled
+            presentSignupAlertView()
+        }
+    }
+    
+    func presentSignupAlertView() {
+        let alertController = UIAlertController(title: "Error", message: "Couldn't create account", preferredStyle: .Alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(defaultAction)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func presentLoginAlertView() {
+        let alertController = UIAlertController(title: "Error", message: "Email/password is incorrect", preferredStyle: .Alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(defaultAction)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
 

@@ -7,12 +7,62 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class RequestViewController: UIViewController {
+
+    @IBOutlet weak var tableView: UITableView!
+    
+    var requestList: [(email: String, id: String)] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        DataController.dataController.CURRENT_USER_REF.child("requests").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+            self.requestList.removeAll()
+            self.tableView.reloadData()
+            for child in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                let id = child.key
+                let email = DataController.dataController.emailForUserID(id, completion: { (email) in
+                    self.requestList.append((email, id))
+                    self.tableView.reloadData()
+                })
+            }
+        })
     }
 
+}
+
+extension RequestViewController: UITableViewDataSource {
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return requestList.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // Create cell
+        var cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as? UserCell
+        if cell == nil {
+            tableView.registerNib(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
+            cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as? UserCell
+        }
+        
+        // Modify cell
+        cell!.button.setTitle("Accept", forState: .Normal)
+        cell!.emailLabel.text = requestList[indexPath.row].email
+        
+        cell!.setFunction {
+            let id = self.requestList[indexPath.row].id
+            DataController.dataController.acceptFriendRequest(id)
+        }
+        
+        
+        // Return cell
+        return cell!
+    }
+    
 }

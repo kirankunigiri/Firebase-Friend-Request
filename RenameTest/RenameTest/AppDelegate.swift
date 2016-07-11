@@ -1,38 +1,21 @@
 //
 //  AppDelegate.swift
-//  FirebaseFriendRequest
+//  RenameTest
 //
-//  Created by Kiran Kunigiri on 7/8/16.
+//  Created by Kiran Kunigiri on 7/11/16.
 //  Copyright © 2016 Kiran. All rights reserved.
 //
 
 import UIKit
-import Firebase
-import FirebaseAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    
+
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        FIRApp.configure()
-
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        var vc: UIViewController!
-        
-        if (FIRAuth.auth()?.currentUser != nil) {
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("tabBarViewController")
-        } else {
-            vc = mainStoryboard.instantiateViewControllerWithIdentifier("signupViewController")
-        }
-        
-        self.window?.rootViewController = vc
-        self.window?.makeKeyAndVisible()
-        
         return true
     }
 
