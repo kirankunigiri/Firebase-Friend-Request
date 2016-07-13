@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseAuth
 
 class UserListViewController: UIViewController {
     
@@ -19,7 +17,9 @@ class UserListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.usernameLabel.text = FIRAuth.auth()?.currentUser?.email!
+        FriendSystem.system.getCurrentUser { (user) in
+            self.usernameLabel.text = user.email
+        }
         
         FriendSystem.system.addUserObserver { () in
             self.tableView.reloadData()
