@@ -30,7 +30,7 @@ class SignupViewController: UIViewController {
         let password = signupPasswordField.text!
         
         if email != "" && password.characters.count >= 6 {
-            DataController.dataController.createAccount(email, password: password) { (success) in
+            FriendSystem.system.createAccount(email, password: password) { (success) in
                 if success {
                     self.performSegueWithIdentifier("signupCompleteSegue", sender: self)
                 } else {
@@ -50,7 +50,7 @@ class SignupViewController: UIViewController {
         let password = loginPasswordField.text!
         
         if email != "" && password.characters.count >= 6 {
-            DataController.dataController.loginAccount(email, password: password) { (success) in
+            FriendSystem.system.loginAccount(email, password: password) { (success) in
                 if success {
                     self.performSegueWithIdentifier("signupCompleteSegue", sender: self)
                 } else {

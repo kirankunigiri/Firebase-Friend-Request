@@ -18,9 +18,10 @@
 		9F333BE41D30B4280079BD8C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F333BE31D30B4280079BD8C /* SignupViewController.swift */; };
 		9F333BE61D30B43A0079BD8C /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F333BE51D30B43A0079BD8C /* FriendViewController.swift */; };
 		9F333BE81D30B43F0079BD8C /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F333BE71D30B43F0079BD8C /* RequestViewController.swift */; };
+		9F3CA9A61D35B7B600A53792 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3CA9A51D35B7B600A53792 /* User.swift */; };
 		9F6230C21D342C8C0036B856 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6230C11D342C8C0036B856 /* UserCell.swift */; };
 		9F6230C41D342F330036B856 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F6230C31D342F330036B856 /* UserCell.xib */; };
-		9F9C89B11D334B12006C5CB9 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C89B01D334B12006C5CB9 /* DataController.swift */; };
+		9F9C89B11D334B12006C5CB9 /* FriendSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C89B01D334B12006C5CB9 /* FriendSystem.swift */; };
 		9FEE80C91D305D38006E2AD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FEE80C81D305D38006E2AD7 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -62,9 +63,10 @@
 		9F333BE31D30B4280079BD8C /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		9F333BE51D30B43A0079BD8C /* FriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		9F333BE71D30B43F0079BD8C /* RequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
+		9F3CA9A51D35B7B600A53792 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9F6230C11D342C8C0036B856 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		9F6230C31D342F330036B856 /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
-		9F9C89B01D334B12006C5CB9 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		9F9C89B01D334B12006C5CB9 /* FriendSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSystem.swift; sourceTree = "<group>"; };
 		9FEE80C81D305D38006E2AD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				9F2527411D304EE20018BBE7 /* AppDelegate.swift */,
-				9F9C89B01D334B12006C5CB9 /* DataController.swift */,
+				9F9C89B01D334B12006C5CB9 /* FriendSystem.swift */,
+				9F3CA9A51D35B7B600A53792 /* User.swift */,
 				9F2527451D304EE20018BBE7 /* Main.storyboard */,
 				9F333BE31D30B4280079BD8C /* SignupViewController.swift */,
 				9F2177EE1D34200A00C2F7E7 /* UserListViewController.swift */,
@@ -356,10 +359,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F9C89B11D334B12006C5CB9 /* DataController.swift in Sources */,
+				9F9C89B11D334B12006C5CB9 /* FriendSystem.swift in Sources */,
 				9F333BE61D30B43A0079BD8C /* FriendViewController.swift in Sources */,
 				9F333BE41D30B4280079BD8C /* SignupViewController.swift in Sources */,
 				9F333BE81D30B43F0079BD8C /* RequestViewController.swift in Sources */,
+				9F3CA9A61D35B7B600A53792 /* User.swift in Sources */,
 				9F2527421D304EE20018BBE7 /* AppDelegate.swift in Sources */,
 				9F2177EF1D34200A00C2F7E7 /* UserListViewController.swift in Sources */,
 				9F6230C21D342C8C0036B856 /* UserCell.swift in Sources */,

@@ -15,28 +15,19 @@ class UserListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var usernameLabel: UILabel!
     
-    var userList: [(email: String, id: String)] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.usernameLabel.text = FIRAuth.auth()?.currentUser?.email!
         
-        DataController.dataController.USER_REF.observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
-            self.userList.removeAll()
+        FriendSystem.system.addUserObserver { () in
             self.tableView.reloadData()
-            for child in snapshot.children.allObjects as! [FIRDataSnapshot] {
-                let email = child.childSnapshotForPath("email").value as! String
-                if email != FIRAuth.auth()?.currentUser?.email! {
-                    self.userList.append((email, child.key))
-                }
-            }
-            self.tableView.reloadData()
-        })
+        }
     }
 
     @IBAction func logoutButtonTapped(sender: UIButton) {
-        DataController.dataController.logoutAccount()
+        FriendSystem.system.logoutAccount()
         
         let appDelegate  = UIApplication.sharedApplication().delegate as! AppDelegate
         let rootVC = appDelegate.window!.rootViewController
@@ -58,7 +49,7 @@ extension UserListViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userList.count
+        return FriendSystem.system.userList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -70,11 +61,11 @@ extension UserListViewController: UITableViewDataSource {
         }
         
         // Modify cell
-        cell!.emailLabel.text = userList[indexPath.row].email
+        cell!.emailLabel.text = FriendSystem.system.userList[indexPath.row].email
         
         cell!.setFunction {
-            let id = self.userList[indexPath.row].id
-            DataController.dataController.sendRequestToUser(id)
+            let id = FriendSystem.system.userList[indexPath.row].id
+            FriendSystem.system.sendRequestToUser(id)
         }
         
         // Return cell

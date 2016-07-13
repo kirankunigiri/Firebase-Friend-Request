@@ -13,22 +13,12 @@ class FriendViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var friendList: [(email: String, id: String)] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DataController.dataController.CURRENT_USER_REF.child("friends").observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
-            self.friendList.removeAll()
+        FriendSystem.system.addFriendObserver {
             self.tableView.reloadData()
-            for child in snapshot.children.allObjects as! [FIRDataSnapshot] {
-                let id = child.key
-                DataController.dataController.emailForUserID(id, completion: { (email) in
-                    self.friendList.append((email, id))
-                    self.tableView.reloadData()
-                })
-            }
-        })
+        }
     }
 }
 
@@ -39,7 +29,7 @@ extension FriendViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friendList.count
+        return FriendSystem.system.friendList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -52,11 +42,11 @@ extension FriendViewController: UITableViewDataSource {
         
         // Modify cell
         cell!.button.setTitle("Remove", forState: .Normal)
-        cell!.emailLabel.text = friendList[indexPath.row].email
+        cell!.emailLabel.text = FriendSystem.system.friendList[indexPath.row].email
         
         cell!.setFunction {
-            let id = self.friendList[indexPath.row].id
-            DataController.dataController.removeFriend(id)
+            let id = FriendSystem.system.friendList[indexPath.row].id
+            FriendSystem.system.removeFriend(id)
         }
         
         // Return cell
