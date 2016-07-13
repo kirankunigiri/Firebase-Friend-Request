@@ -11,8 +11,7 @@ This class assumes that you are using the suggested structure for users, in whic
 firebase {
   users {
     generatedUserId {
-      email: "userEmail"
-      otherProperty: "otherValue"
+      userProperty: "value"
     }
   }
 }
@@ -46,6 +45,24 @@ var requestList = [User]()
 func addRequestObserver(update: () -> Void)
 func removeRequestObserver()
 ```
+
+## Structure
+The system uses the following structure:
+```
+firebase {
+  users {
+    generatedUserId {
+      requests { // Requests sent from other users
+        otherUserId: "id"
+      }
+      friends { // Users who have accepted your request or vice versa
+        otherUserId: "id"
+      }
+    }
+  }
+}
+```
+
 
 ## Demo
 The demo was made with the MVC model, so all of the View Controller classes never have to import Firebase. All the data functions are written in the FriendSystem class, and the View Controller calls them to get access to the data. The demo has a signup/login page, and then another for viewing a list of all users, your friend requests, and your actual friends. You can test it by creating new accounts, sending friend requests to each other, and then accepting them.
