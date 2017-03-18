@@ -24,15 +24,15 @@ class SignupViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @IBAction func signupButtonTapped(sender: UIButton) {
+    @IBAction func signupButtonTapped(_ sender: UIButton) {
         
         let email = signupEmailField.text!
         let password = signupPasswordField.text!
         
         if email != "" && password.characters.count >= 6 {
-            FriendSystem.system.createAccount(email, password: password) { (success) in
+            FriendSystem.system.createAccount(email, password: password, name: "Name") { (success) in
                 if success {
-                    self.performSegueWithIdentifier("signupCompleteSegue", sender: self)
+                    self.performSegue(withIdentifier: "signupCompleteSegue", sender: self)
                 } else {
                     // Error
                     self.presentSignupAlertView()
@@ -45,14 +45,14 @@ class SignupViewController: UIViewController {
         
     }
     
-    @IBAction func loginButtonTapped(sender: UIButton) {
+    @IBAction func loginButtonTapped(_ sender: UIButton) {
         let email = loginEmailField.text!
         let password = loginPasswordField.text!
         
         if email != "" && password.characters.count >= 6 {
             FriendSystem.system.loginAccount(email, password: password) { (success) in
                 if success {
-                    self.performSegueWithIdentifier("signupCompleteSegue", sender: self)
+                    self.performSegue(withIdentifier: "signupCompleteSegue", sender: self)
                 } else {
                     // Error
                     self.presentSignupAlertView()
@@ -65,22 +65,22 @@ class SignupViewController: UIViewController {
     }
     
     func presentSignupAlertView() {
-        let alertController = UIAlertController(title: "Error", message: "Couldn't create account", preferredStyle: .Alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let alertController = UIAlertController(title: "Error", message: "Couldn't create account", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(defaultAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     func presentLoginAlertView() {
-        let alertController = UIAlertController(title: "Error", message: "Email/password is incorrect", preferredStyle: .Alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let alertController = UIAlertController(title: "Error", message: "Email/password is incorrect", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(defaultAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
 
     // MARK: - Text field end editing
-    @IBAction func backgroundTapped(sender: UITapGestureRecognizer) {
+    @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
 }

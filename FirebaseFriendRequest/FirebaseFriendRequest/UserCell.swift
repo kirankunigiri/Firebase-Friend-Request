@@ -15,11 +15,11 @@ class UserCell: UITableViewCell {
     
     var buttonFunc: (() -> (Void))!
     
-    @IBAction func buttonTapped(sender: UIButton) {
+    @IBAction func buttonTapped(_ sender: UIButton) {
         buttonFunc()
     }
     
-    func setFunction(function: () -> Void) {
+    func setFunction(_ function: @escaping () -> Void) {
         self.buttonFunc = function
     }
     

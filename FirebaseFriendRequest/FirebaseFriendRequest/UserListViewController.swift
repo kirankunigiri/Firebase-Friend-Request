@@ -26,16 +26,16 @@ class UserListViewController: UIViewController {
         }
     }
 
-    @IBAction func logoutButtonTapped(sender: UIButton) {
+    @IBAction func logoutButtonTapped(_ sender: UIButton) {
         FriendSystem.system.logoutAccount()
         
-        let appDelegate  = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate  = UIApplication.shared.delegate as! AppDelegate
         let rootVC = appDelegate.window!.rootViewController
         
         if rootVC == self.tabBarController {
-            self.presentViewController((storyboard?.instantiateInitialViewController())!, animated: true, completion: nil)
+            self.present((storyboard?.instantiateInitialViewController())!, animated: true, completion: nil)
         } else {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -44,20 +44,20 @@ class UserListViewController: UIViewController {
 
 extension UserListViewController: UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return FriendSystem.system.userList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Create cell
-        var cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as? UserCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "UserCell") as? UserCell
         if cell == nil {
-            tableView.registerNib(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
-            cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as? UserCell
+            tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
+            cell = tableView.dequeueReusableCell(withIdentifier: "UserCell") as? UserCell
         }
         
         // Modify cell
@@ -65,7 +65,7 @@ extension UserListViewController: UITableViewDataSource {
         
         cell!.setFunction {
             let id = FriendSystem.system.userList[indexPath.row].id
-            FriendSystem.system.sendRequestToUser(id)
+            FriendSystem.system.sendRequestToUser(id!)
         }
         
         // Return cell

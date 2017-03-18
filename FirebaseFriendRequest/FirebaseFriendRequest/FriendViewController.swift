@@ -23,29 +23,29 @@ class FriendViewController: UIViewController {
 
 extension FriendViewController: UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return FriendSystem.system.friendList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Create cell
-        var cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as? UserCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "UserCell") as? UserCell
         if cell == nil {
-            tableView.registerNib(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
-            cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as? UserCell
+            tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
+            cell = tableView.dequeueReusableCell(withIdentifier: "UserCell") as? UserCell
         }
         
         // Modify cell
-        cell!.button.setTitle("Remove", forState: .Normal)
+        cell!.button.setTitle("Remove", for: UIControlState())
         cell!.emailLabel.text = FriendSystem.system.friendList[indexPath.row].email
         
         cell!.setFunction {
             let id = FriendSystem.system.friendList[indexPath.row].id
-            FriendSystem.system.removeFriend(id)
+            FriendSystem.system.removeFriend(id!)
         }
         
         // Return cell

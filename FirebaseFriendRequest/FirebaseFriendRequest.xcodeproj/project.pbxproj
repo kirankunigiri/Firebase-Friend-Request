@@ -21,6 +21,7 @@
 		9F3CA9A61D35B7B600A53792 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3CA9A51D35B7B600A53792 /* User.swift */; };
 		9F6230C21D342C8C0036B856 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6230C11D342C8C0036B856 /* UserCell.swift */; };
 		9F6230C41D342F330036B856 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F6230C31D342F330036B856 /* UserCell.xib */; };
+		9F6E781B1D45C272008E03C5 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6E781A1D45C272008E03C5 /* Error.swift */; };
 		9F9C89B11D334B12006C5CB9 /* FriendSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C89B01D334B12006C5CB9 /* FriendSystem.swift */; };
 		9FEE80C91D305D38006E2AD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FEE80C81D305D38006E2AD7 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,7 @@
 		9F3CA9A51D35B7B600A53792 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9F6230C11D342C8C0036B856 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		9F6230C31D342F330036B856 /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
+		9F6E781A1D45C272008E03C5 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		9F9C89B01D334B12006C5CB9 /* FriendSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSystem.swift; sourceTree = "<group>"; };
 		9FEE80C81D305D38006E2AD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 			children = (
 				9F2527411D304EE20018BBE7 /* AppDelegate.swift */,
 				9F9C89B01D334B12006C5CB9 /* FriendSystem.swift */,
+				9F6E781A1D45C272008E03C5 /* Error.swift */,
 				9F3CA9A51D35B7B600A53792 /* User.swift */,
 				9F2527451D304EE20018BBE7 /* Main.storyboard */,
 				9F333BE31D30B4280079BD8C /* SignupViewController.swift */,
@@ -241,18 +244,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Kiran;
 				TargetAttributes = {
 					9F25273D1D304EE20018BBE7 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 					};
 					9F2527511D304EE20018BBE7 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 9F25273D1D304EE20018BBE7;
 					};
 					9F25275C1D304EE20018BBE7 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 9F25273D1D304EE20018BBE7;
 					};
 				};
@@ -366,6 +372,7 @@
 				9F3CA9A61D35B7B600A53792 /* User.swift in Sources */,
 				9F2527421D304EE20018BBE7 /* AppDelegate.swift in Sources */,
 				9F2177EF1D34200A00C2F7E7 /* UserListViewController.swift in Sources */,
+				9F6E781B1D45C272008E03C5 /* Error.swift in Sources */,
 				9F6230C21D342C8C0036B856 /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,8 +442,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -481,8 +490,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -501,6 +512,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -515,6 +527,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = self.edu.FirebaseFriendRequest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -527,6 +540,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = self.edu.FirebaseFriendRequest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -538,6 +552,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = self.edu.FirebaseFriendRequestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirebaseFriendRequest.app/FirebaseFriendRequest";
 			};
 			name = Debug;
@@ -550,6 +565,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = self.edu.FirebaseFriendRequestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirebaseFriendRequest.app/FirebaseFriendRequest";
 			};
 			name = Release;
@@ -561,6 +577,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = self.edu.FirebaseFriendRequestUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = FirebaseFriendRequest;
 			};
 			name = Debug;
@@ -572,6 +589,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = self.edu.FirebaseFriendRequestUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = FirebaseFriendRequest;
 			};
 			name = Release;
