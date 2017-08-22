@@ -13,18 +13,24 @@ class Error {
     
     var errorMessage: String!
     
-    init(error: FIRAuthErrorCode) {
+    init(error: AuthErrorCode) {
         switch error {
-        case .errorCodeInvalidEmail:
+            
+        case .invalidEmail:
             errorMessage = "Whoops! That's not a valid email!"
-        case .errorCodeUserDisabled:
+            
+        case .userDisabled:
             errorMessage = "This user is blocked."
-        case .errorCodeWrongPassword:
+            
+        case .wrongPassword:
             errorMessage = "Looks like the email or password is incorrect!"
-        case .errorCodeEmailAlreadyInUse:
+            
+        case .emailAlreadyInUse:
             errorMessage = "There's already an account with this email!"
-        case .errorCodeWeakPassword:
+            
+        case .weakPassword:
             errorMessage = "The password is too weak. Try something stronger!"
+            
         default:
             errorMessage = "Looks like something went wrong. Please try again!"
         }
