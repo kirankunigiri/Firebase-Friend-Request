@@ -16,36 +16,36 @@ class FriendSystem {
     
     // MARK: - Firebase references
     /** The base Firebase reference */
-    let BASE_REF = FIRDatabase.database().reference()
+    let BASE_REF = Database.database().reference()
     /* The user Firebase reference */
-    let USER_REF = FIRDatabase.database().reference().child("users")
+    let USER_REF = Database.database().reference().child("users")
     
     /** The Firebase reference to the current user tree */
-    var CURRENT_USER_REF: FIRDatabaseReference {
-        let id = FIRAuth.auth()?.currentUser!.uid
-        return USER_REF.child("\(id!)")
+    var CURRENT_USER_REF: DatabaseReference {
+        let id = Auth.auth().currentUser!.uid
+        return USER_REF.child("\(id)")
     }
     
     /** The Firebase reference to the current user's friend tree */
-    var CURRENT_USER_FRIENDS_REF: FIRDatabaseReference {
+    var CURRENT_USER_FRIENDS_REF: DatabaseReference {
         return CURRENT_USER_REF.child("friends")
     }
     
     /** The Firebase reference to the current user's friend request tree */
-    var CURRENT_USER_REQUESTS_REF: FIRDatabaseReference {
+    var CURRENT_USER_REQUESTS_REF: DatabaseReference {
         return CURRENT_USER_REF.child("requests")
     }
     
     /** The current user's id */
     var CURRENT_USER_ID: String {
-        let id = FIRAuth.auth()?.currentUser!.uid
-        return id!
+        let id = Auth.auth().currentUser!.uid
+        return id
     }
 
     
     /** Gets the current User object for the specified user id */
     func getCurrentUser(_ completion: @escaping (User) -> Void) {
-        CURRENT_USER_REF.observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        CURRENT_USER_REF.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let email = snapshot.childSnapshot(forPath: "email").value as! String
             let id = snapshot.key
             completion(User(userEmail: email, userID: id))
@@ -53,7 +53,7 @@ class FriendSystem {
     }
     /** Gets the User object for the specified user id */
     func getUser(_ userID: String, completion: @escaping (User) -> Void) {
-        USER_REF.child(userID).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        USER_REF.child(userID).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let email = snapshot.childSnapshot(forPath: "email").value as! String
             let id = snapshot.key
             completion(User(userEmail: email, userID: id))
@@ -70,7 +70,7 @@ class FriendSystem {
      indicates whether or not the signup was a success
      */
     func createAccount(_ email: String, password: String, name: String, completion: @escaping (_ success: Bool) -> Void) {
-        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
             
             if (error == nil) {
                 // Success
@@ -93,7 +93,7 @@ class FriendSystem {
      indicates whether or not the login was a success
      */
     func loginAccount(_ email: String, password: String, completion: @escaping (_ success: Bool) -> Void) {
-        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+        Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
             
             if (error == nil) {
                 // Success
@@ -109,7 +109,7 @@ class FriendSystem {
     
     /** Logs out an account */
     func logoutAccount() {
-        try! FIRAuth.auth()?.signOut()
+        try! Auth.auth().signOut()
     }
     
     
@@ -143,11 +143,11 @@ class FriendSystem {
     /** Adds a user observer. The completion function will run every time this list changes, allowing you  
      to update your UI. */
     func addUserObserver(_ update: @escaping () -> Void) {
-        FriendSystem.system.USER_REF.observe(FIRDataEventType.value, with: { (snapshot) in
+        FriendSystem.system.USER_REF.observe(DataEventType.value, with: { (snapshot) in
             self.userList.removeAll()
-            for child in snapshot.children.allObjects as! [FIRDataSnapshot] {
+            for child in snapshot.children.allObjects as! [DataSnapshot] {
                 let email = child.childSnapshot(forPath: "email").value as! String
-                if email != FIRAuth.auth()?.currentUser?.email! {
+                if email != Auth.auth().currentUser?.email! {
                     self.userList.append(User(userEmail: email, userID: child.key))
                 }
             }
@@ -167,9 +167,9 @@ class FriendSystem {
     /** Adds a friend observer. The completion function will run every time this list changes, allowing you
      to update your UI. */
     func addFriendObserver(_ update: @escaping () -> Void) {
-        CURRENT_USER_FRIENDS_REF.observe(FIRDataEventType.value, with: { (snapshot) in
+        CURRENT_USER_FRIENDS_REF.observe(DataEventType.value, with: { (snapshot) in
             self.friendList.removeAll()
-            for child in snapshot.children.allObjects as! [FIRDataSnapshot] {
+            for child in snapshot.children.allObjects as! [DataSnapshot] {
                 let id = child.key
                 self.getUser(id, completion: { (user) in
                     self.friendList.append(user)
@@ -195,9 +195,9 @@ class FriendSystem {
     /** Adds a friend request observer. The completion function will run every time this list changes, allowing you
      to update your UI. */
     func addRequestObserver(_ update: @escaping () -> Void) {
-        CURRENT_USER_REQUESTS_REF.observe(FIRDataEventType.value, with: { (snapshot) in
+        CURRENT_USER_REQUESTS_REF.observe(DataEventType.value, with: { (snapshot) in
             self.requestList.removeAll()
-            for child in snapshot.children.allObjects as! [FIRDataSnapshot] {
+            for child in snapshot.children.allObjects as! [DataSnapshot] {
                 let id = child.key
                 self.getUser(id, completion: { (user) in
                     self.requestList.append(user)
